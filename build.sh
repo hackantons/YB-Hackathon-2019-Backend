@@ -6,6 +6,7 @@ for path in $(ls); do
     then
         echo "deploying $path"
         cd "$path"
+        npm install
         serverless deploy --stage prod --verbose
         cd $OLDPWD
     else 
