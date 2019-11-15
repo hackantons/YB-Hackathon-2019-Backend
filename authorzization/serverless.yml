@@ -3,6 +3,15 @@ provider:
   name: aws
   region: eu-central-1
 
+functions:
+  autoconfirm:
+    handler: autoconfirm.autoconfirm
+    events:  
+      - cognitoUserPool:
+        pool: yb-hackathon-auth
+        trigger: PreSignUp
+        existing: true
+
 resources: 
   Resources:
     CognitoUserPool:
