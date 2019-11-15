@@ -6,7 +6,7 @@ for path in $(ls); do
     then
         echo "deploying $path"
         cd "$path"
-        serverless deploy --stage production --verbose
+        serverless deploy --stage prod --verbose
         cd $OLDPWD
     else 
         continue
