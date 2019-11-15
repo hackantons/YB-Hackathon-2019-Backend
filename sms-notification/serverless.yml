@@ -1,0 +1,24 @@
+service: sns-notification-example
+provider:
+  name: aws
+  region: eu-west-1 
+
+functions:  
+  registerreceiver:
+    handler: registerReceiver.lambda_handler
+    runtime: python3.7
+    events:
+      - sns: sns-topic
+      - http:
+        path: register-receiver
+        method: post
+        cors: true
+
+  sendSMS:
+    handler: sendSMS.lambda_handler
+    runtime: python3.7
+    events:
+      - http:
+          path: sms
+          method: post
+          cors: true
