@@ -10,9 +10,9 @@ functions:
     events:
       - sns: sns-topic
       - http:
-        path: register-receiver
-        method: post
-        cors: true
+          path: register-receiver
+          method: post
+          cors: true
 
   sendSMS:
     handler: sendSMS.lambda_handler
