@@ -25,14 +25,12 @@ module.exports.update = (event, context, callback) => {
       id: event.pathParameters.id,
     },
     ExpressionAttributeNames: {
-      '#profile_text': 'text',
+      '#profile_data': 'data',
     },
     ExpressionAttributeValues: {
-      ':text': data.text,
-      ':checked': data.checked,
-      ':updatedAt': timestamp,
+      ':data': data,
     },
-    UpdateExpression: 'SET #profile_text = :text, checked = :checked, updatedAt = :updatedAt',
+    UpdateExpression: 'SET #profile_data = :data',
     ReturnValues: 'ALL_NEW',
   };
 
@@ -42,7 +40,7 @@ module.exports.update = (event, context, callback) => {
       callback(null, {
         statusCode: error.statusCode || 501,
         headers: { 'Content-Type': 'text/plain' },
-        body: 'Couldn\'t fetch the todo item.',
+        body: 'Couldn\'t fetch the profile item.',
       });
       return;
     }
