@@ -9,7 +9,7 @@ resources:
       Type: AWS::Cognito::IdentityPool
       Properties: 
         IdentityPoolName: stream-identity-pool
-        AllowUnauthenticatedIdentities: Boolean
+        AllowUnauthenticatedIdentities: true
 
     CognitoUnAuthorizedRole:
       Type: "AWS::IAM::Role"

@@ -1,0 +1,15 @@
+# Type: AWS::MSK::Cluster
+# Properties: 
+#   BrokerNodeGroupInfo: 
+#     BrokerNodeGroupInfo
+#   ClientAuthentication: 
+#     ClientAuthentication
+#   ClusterName: String
+#   ConfigurationInfo: 
+#     ConfigurationInfo
+#   EncryptionInfo: 
+#     EncryptionInfo
+#   EnhancedMonitoring: String
+#   KafkaVersion: String
+#   NumberOfBrokerNodes: Integer
+#   Tags: Json
