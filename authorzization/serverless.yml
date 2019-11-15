@@ -8,8 +8,9 @@ functions:
     handler: autoconfirm.autoconfirm
     events:  
       - cognitoUserPool:
-        pool: yb-hackathon-auth
+        pool: arn:aws:cognito-idp:eu-central-1:829534015160:userpool/eu-central-1_LOHwvHVa6
         trigger: PreSignUp
+        existing: true
 
 resources: 
   Resources:
