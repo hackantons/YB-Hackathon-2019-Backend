@@ -8,14 +8,13 @@ functions:
     handler: autoconfirm.autoconfirm
     events:  
       - cognitoUserPool:
-        pool: 
-          Ref: CognitoUserPool
+        pool: YBUsers
         trigger: PreSignUp
         existing: true
 
 resources: 
   Resources:
-    CognitoUserPool:
+    CognitoUserPoolYBUsers:
       Type: AWS::Cognito::UserPool
       Properties:
         UserPoolName: yb-hackathon-auth
@@ -30,7 +29,7 @@ resources:
         # Generate an app client name based on the stage
         ClientName: yb-hackathon-auth-client
         UserPoolId:
-          Ref: CognitoUserPool
+          Ref: CognitoUserPoolYBUsers
         ExplicitAuthFlows:
           - ADMIN_NO_SRP_AUTH
         GenerateSecret: false
@@ -44,7 +43,7 @@ resources:
           - ClientId:
               Ref: CognitoUserPoolClient
             ProviderName:
-              Fn::GetAtt: [ "CognitoUserPool", "ProviderName" ]    
+              Fn::GetAtt: [ "CognitoUserPoolYBUsers", "ProviderName" ]    
 
     CognitoIdentityPoolRoles:
       Type: AWS::Cognito::IdentityPoolRoleAttachment
@@ -89,7 +88,7 @@ resources:
 Outputs:
   UserPoolId:
     Value:
-      Ref: CognitoUserPool
+      Ref: CognitoUserPoolYBUsers
 
   UserPoolClientId:
     Value:
