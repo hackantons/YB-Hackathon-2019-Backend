@@ -8,9 +8,8 @@ functions:
     handler: autoconfirm.autoconfirm
     events:  
       - cognitoUserPool:
-        pool: YBUsers
+        pool: yb-hackathon-auth
         trigger: PreSignUp
-        existing: true
 
 resources: 
   Resources:
