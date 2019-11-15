@@ -1,0 +1,24 @@
+service: text-sentiment-analysis
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: eu-central-1
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - "comprehend:*"
+        - "s3:ListAllMyBuckets"
+        - "s3:ListBucket"
+        - "s3:GetBucketLocation"
+        - "iam:ListRoles"
+        - "iam:GetRole"
+      Resource: "*"
+    
+functions:
+  imageAnalysis:
+    handler: sentiment.handler
+    events:
+      - http:
+          path: sentiment
+          method: post    
