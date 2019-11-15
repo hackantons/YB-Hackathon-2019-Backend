@@ -7,6 +7,10 @@ const params = {
   TableName: process.env.DYNAMODB_TABLE,
 };
 
+let enableCORS = { "x-custom-header" : "x-amzn-RequestId,x-amzn-ErrorType,x-amzn-ErrorMessage,Date",
+                   "Access-Control-Allow-Origin": "*"
+                 }
+
 module.exports.list = (event, context, callback) => {
   // fetch all todos from the database
   dynamoDb.scan(params, (error, result) => {
@@ -15,7 +19,7 @@ module.exports.list = (event, context, callback) => {
       console.error(error);
       callback(null, {
         statusCode: error.statusCode || 501,
-        headers: { 'Content-Type': 'text/plain' },
+        headers: { 'Content-Type': 'text/plain', ...enableCORS },
         body: 'Couldn\'t fetch the groups.',
       });
       return;
@@ -24,6 +28,7 @@ module.exports.list = (event, context, callback) => {
     // create a response
     const response = {
       statusCode: 200,
+      headers: enableCORS,
       body: JSON.stringify(result.Items),
     };
     callback(null, response);

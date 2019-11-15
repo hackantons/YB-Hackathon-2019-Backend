@@ -4,6 +4,10 @@ const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-depe
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
+let enableCORS = { "x-custom-header" : "x-amzn-RequestId,x-amzn-ErrorType,x-amzn-ErrorMessage,Date",
+                   "Access-Control-Allow-Origin": "*"
+                 }
+
 module.exports.update = (event, context, callback) => {
   const timestamp = new Date().getTime();
   const data = JSON.parse(event.body);
@@ -13,7 +17,7 @@ module.exports.update = (event, context, callback) => {
     console.error('Validation Failed');
     callback(null, {
       statusCode: 400,
-      headers: { 'Content-Type': 'text/plain' },
+      headers: { 'Content-Type': 'text/plain', ...enableCORS },
       body: 'Couldn\'t update the profile item.',
     });
     return;
@@ -39,7 +43,7 @@ module.exports.update = (event, context, callback) => {
       console.error(error);
       callback(null, {
         statusCode: error.statusCode || 501,
-        headers: { 'Content-Type': 'text/plain' },
+        headers: { 'Content-Type': 'text/plain', ...enableCORS },
         body: 'Couldn\'t fetch the profile item.',
       });
       return;
@@ -48,6 +52,7 @@ module.exports.update = (event, context, callback) => {
     // create a response
     const response = {
       statusCode: 200,
+      headers: enableCORS,
       body: JSON.stringify(result.Attributes),
     };
     callback(null, response);

@@ -5,6 +5,10 @@ const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-depe
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
+let enableCORS = { "x-custom-header" : "x-amzn-RequestId,x-amzn-ErrorType,x-amzn-ErrorMessage,Date",
+                   "Access-Control-Allow-Origin": "*"
+                 }
+
 module.exports.create = (event, context, callback) => {
   const timestamp = new Date().getTime();
   const data = JSON.parse(event.body);
@@ -24,6 +28,7 @@ module.exports.create = (event, context, callback) => {
       id: uuid.v1(),
       data: data,
     },
+    ConditionExpression: 'attribute_not_exists(id)'
   };
 
   dynamoDb.put(params, (error) => {
@@ -31,7 +36,7 @@ module.exports.create = (event, context, callback) => {
       console.error(error);
       callback(null, {
         statusCode: error.statusCode || 501,
-        headers: { 'Content-Type': 'text/plain' },
+        headers: { 'Content-Type': 'text/plain', ...enableCORS },
         body: 'Couldn\'t create the profile item.',
       });
       return;
@@ -40,6 +45,7 @@ module.exports.create = (event, context, callback) => {
     // create a response
     const response = {
       statusCode: 200,
+      headers: enableCORS,
       body: JSON.stringify(params.Item),
     };
     callback(null, response);
