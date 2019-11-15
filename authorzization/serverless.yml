@@ -2,29 +2,30 @@ service: yb-hackathon-auth
 provider:
   name: aws
   region: eu-central-1
-  
-Resources:
-  CognitoUserPool:
-    Type: AWS::Cognito::UserPool
-    Properties:
-      # Generate a name based on the stage
-      UserPoolName: yb-hackathon-auth
-      # Set email as an alias
-      UsernameAttributes:
-        - email
-      AutoVerifiedAttributes:
-        - email
 
-  CognitoUserPoolClient:
-    Type: AWS::Cognito::UserPoolClient
-    Properties:
-      # Generate an app client name based on the stage
-      ClientName: yb-hackathon-auth-client
-      UserPoolId:
-        Ref: CognitoUserPool
-      ExplicitAuthFlows:
-        - ADMIN_NO_SRP_AUTH
-      GenerateSecret: false
+resources: 
+  Resources:
+    CognitoUserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        # Generate a name based on the stage
+        UserPoolName: yb-hackathon-auth
+        # Set email as an alias
+        UsernameAttributes:
+          - email
+        AutoVerifiedAttributes:
+          - email
+
+    CognitoUserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+        # Generate an app client name based on the stage
+        ClientName: yb-hackathon-auth-client
+        UserPoolId:
+          Ref: CognitoUserPool
+        ExplicitAuthFlows:
+          - ADMIN_NO_SRP_AUTH
+        GenerateSecret: false
     
 Outputs:
   UserPoolId:
