@@ -25,7 +25,7 @@ resources:
               Condition:
                 StringEquals: 
                   "cognito-identity.amazonaws.com:aud": 
-                    !Ref IdentityPool 
+                    Ref: IdentityPool 
                   "ForAnyValue:StringLike":
                     "cognito-identity.amazonaws.com:amr": unauthenticated
         Policies:
