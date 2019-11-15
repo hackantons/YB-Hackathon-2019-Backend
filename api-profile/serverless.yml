@@ -1,10 +1,11 @@
-service: serverless-rest-api-with-dynamodb
+service: yb-hackathon-profile
 
 frameworkVersion: ">=1.1.0 <2.0.0"
 
 provider:
   name: aws
   runtime: nodejs10.x
+  region: eu-central-1
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
   iamRoleStatements:
@@ -15,48 +16,48 @@ provider:
 
 functions:
   create:
-    handler: todos/create.create
+    handler: profile/create.create
     events:
       - http:
-          path: todos
+          path: profile
           method: post
           cors: true
 
   list:
-    handler: todos/list.list
+    handler: profile/list.list
     events:
       - http:
-          path: todos
+          path: profile
           method: get
           cors: true
 
   get:
-    handler: todos/get.get
+    handler: profile/get.get
     events:
       - http:
-          path: todos/{id}
+          path: profile/{id}
           method: get
           cors: true
 
   update:
-    handler: todos/update.update
+    handler: profile/update.update
     events:
       - http:
-          path: todos/{id}
+          path: profile/{id}
           method: put
           cors: true
 
   delete:
-    handler: todos/delete.delete
+    handler: profile/delete.delete
     events:
       - http:
-          path: todos/{id}
+          path: profile/{id}
           method: delete
           cors: true
 
 resources:
   Resources:
-    TodosDynamoDbTable:
+    ProfileDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
