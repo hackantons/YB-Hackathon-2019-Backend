@@ -1,4 +1,4 @@
-service: sns-notification-example
+service: sms-sender
 provider:
   name: aws
   region: eu-west-1 
