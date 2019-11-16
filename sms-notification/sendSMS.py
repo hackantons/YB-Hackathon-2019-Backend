@@ -21,5 +21,8 @@ def lambda_handler(event, context):
     #     )
     
     return {
-        'statusCode':200
+        'statusCode':200,
+        'headers': { "x-custom-header" : "x-amzn-RequestId,x-amzn-ErrorType,x-amzn-ErrorMessage,Date",
+                   "Access-Control-Allow-Origin": "*"
+                    }
     }
