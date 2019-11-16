@@ -1,6 +1,19 @@
+import boto3
+import json
+
 def lambda_handler(event, context):
-    #print("Received event: " + json.dumps(event, indent=2))
-    message = event['Records'][0]['Sns']['Message']
-    print("From SNS: " + message)
+
+    sns = boto3.client('sns')
     
-    return message
+    print(event)
+    
+    message = json.loads(event['body'])['message']
+    
+    response = sns.publish(    
+        TopicArn='arn:aws:sns:eu-west-1:829534015160:sns-topic',
+        Message=message,
+        )
+    
+    return {
+        'statusCode':200
+    }
