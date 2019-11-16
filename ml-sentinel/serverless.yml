@@ -8,9 +8,7 @@ provider:
     - Effect: Allow
       Action:
         - "comprehend:*"
-        - "s3:ListAllMyBuckets"
-        - "s3:ListBucket"
-        - "s3:GetBucketLocation"
+        - "s3:*"
         - "iam:ListRoles"
         - "iam:GetRole"
         - "kinesis:*"
