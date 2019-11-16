@@ -23,7 +23,7 @@ resources:
     KinesisFirehose:
       Type: AWS::KinesisFirehose::DeliveryStream
       Properties:
-        DeliveryStreamName: "yb-firehose"
+        DeliveryStreamName: "yb-firehose-stream"
         DeliveryStreamType: "KinesisStreamAsSource"
         KinesisStreamSourceConfiguration:
           KinesisStreamARN: "arn:aws:kinesis:eu-central-1:829534015160:stream/Foo"
