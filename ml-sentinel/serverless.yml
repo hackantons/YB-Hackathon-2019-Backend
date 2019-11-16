@@ -34,12 +34,12 @@ resources:
         DeliveryStreamName: "yb-firehose"
         DeliveryStreamType: "KinesisStreamAsSource"
         KinesisStreamSourceConfiguration:
-          - KinesisStreamARN: "arn:aws:kinesis:eu-central-1:829534015160:stream/Foo"
-            RoleARN: "arn:aws:iam::829534015160:role/RoleForKinesisComprehend"
+          KinesisStreamARN: "arn:aws:kinesis:eu-central-1:829534015160:stream/Foo"
+          RoleARN: "arn:aws:iam::829534015160:role/RoleForKinesisComprehend"
         S3DestinationConfiguration:
-          - BucketARN: "arn:aws:s3:::yb-hackathon"
-            BufferingHints:
-              - IntervalInSeconds: "60"
-                SizeInMBs: "100"
-            CompressionFormat: "GZIP"
-            RoleARN: "arn:aws:iam::829534015160:role/RoleForKinesisComprehend"
+          BucketARN: "arn:aws:s3:::yb-hackathon"
+          BufferingHints:
+            IntervalInSeconds: "60"
+            SizeInMBs: "100"
+          CompressionFormat: "GZIP"
+          RoleARN: "arn:aws:iam::829534015160:role/RoleForKinesisComprehend"
