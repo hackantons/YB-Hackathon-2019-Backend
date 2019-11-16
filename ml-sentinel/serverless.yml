@@ -15,12 +15,6 @@ provider:
       Resource: "*"
 
 functions:
-  imageAnalysis:
-    handler: sentiment.handler
-    events:
-      - http:
-          path: sentiment
-          method: post
   sentinel:
     handler: sentinel.handler
 
