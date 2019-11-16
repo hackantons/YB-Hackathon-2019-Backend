@@ -6,22 +6,21 @@ import boto3
 def lambda_handler(event, context):
     
     sns = boto3.client('sns')
-
-    phonenumber = event['body'][0]['number']
-    print(phonenumber)
-
+    
+    data = json.loads(event['body'])
+    phonenumber = data['number']
 
     response = sns.subscribe(
-        TopicArn='sms',
+        TopicArn='arn:aws:sns:eu-west-1:829534015160:sns-topic',
         Protocol='sms',
-        Endpoint=event.phonenumber,
-        Attributes={
-            'string': 'string'
-        }
+        Endpoint=phonenumber,
+        ReturnSubscriptionArn=True
     )
 
     print("Registered complete")
     
-    return response
+    return {
+        'statusCode': 200
+    }
 
 
