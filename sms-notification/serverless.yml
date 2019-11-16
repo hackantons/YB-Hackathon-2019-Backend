@@ -4,15 +4,15 @@ provider:
   region: eu-west-1 
 
 functions:  
-  registerreceiver:
-    handler: registerReceiver.lambda_handler
-    runtime: python3.7
-    events:
-      - sns: sns-topic
-      - http:
-          path: register-receiver
-          method: post
-          cors: true
+  # registerreceiver:
+  #   handler: registerReceiver.lambda_handler
+  #   runtime: python3.7
+  #   events:
+  #     - sns: sns-topic
+  #     - http:
+  #         path: register-receiver
+  #         method: post
+  #         cors: true
 
   sendSMS:
     handler: sendSMS.lambda_handler

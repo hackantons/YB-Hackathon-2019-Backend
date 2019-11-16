@@ -14,11 +14,11 @@ def lambda_handler(event, context):
             PhoneNumber=data['number'],
             Message=message,
         ) 
-    else:
-        sns.publish(    
-            TopicArn='arn:aws:sns:eu-west-1:829534015160:sns-topic',
-            Message=message,
-        )
+    # else:
+    #     sns.publish(    
+    #         TopicArn='arn:aws:sns:eu-west-1:829534015160:sns-topic',
+    #         Message=message,
+    #     )
     
     return {
         'statusCode':200
